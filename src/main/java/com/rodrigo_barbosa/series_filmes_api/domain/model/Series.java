@@ -15,7 +15,6 @@ public class Series {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private String titulo;
     private  Integer temporada;
     private String genero;

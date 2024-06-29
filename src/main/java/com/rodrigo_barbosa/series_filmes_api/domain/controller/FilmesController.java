@@ -15,19 +15,23 @@ public class FilmesController {
     private FilmesService filmesService;
 
     @PostMapping
-    public Filmes salvar(@RequestBody Filmes filmes){
+    public Filmes salvar(@RequestBody Filmes filmes) {
         return filmesService.salvar(filmes);
     }
 
 
     @GetMapping
-    public List<Filmes> listarFilmes (){
+    public List<Filmes> listarFilmes() {
         return filmesService.listarFilmes();
     }
 
 
+    @GetMapping("/{id}")
+    public Filmes buscarFilmePorId(@PathVariable Integer id) {
+        return filmesService.buscarFilmeId(id);
+    }
 
-    @PutMapping("atualizar/{id}")
+    @PutMapping("/atualizar/{id}")
     public Filmes atualizar(@PathVariable Integer id, @RequestBody Filmes filmes) {
         if (!id.equals(filmes.getId())) {
             throw new IllegalArgumentException("O ID do filme no path não corresponde ao ID do filme no corpo da requisição");
@@ -37,7 +41,7 @@ public class FilmesController {
 
 
     @DeleteMapping("/{id}")
-    public void deletarFilmePorId(Integer id){
+    public void deletarFilmePorId(@PathVariable Integer id) {
         filmesService.deletarFilmePorId(id);
     }
 }

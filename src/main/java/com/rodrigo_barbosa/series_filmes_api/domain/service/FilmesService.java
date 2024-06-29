@@ -5,6 +5,7 @@ import com.rodrigo_barbosa.series_filmes_api.domain.repository.FilmesRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,12 @@ public class FilmesService {
     //GET ALL
     public List<Filmes> listarFilmes() {
         return filmesRepository.findAll();
+    }
+
+    //GET FILME BY ID
+    public Filmes buscarFilmeId(Integer id){
+        return filmesRepository.findById(id).get();
+
     }
 
     //PUT
