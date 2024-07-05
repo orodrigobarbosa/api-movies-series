@@ -29,7 +29,7 @@ public class FilmesService {
     }
 
     //GET FILME BY ID
-    public Filmes buscarFilmeId(Integer id){
+    public Filmes buscarFilmeId(Integer id) {
         return filmesRepository.findById(id).get();
 
     }
@@ -51,4 +51,53 @@ public class FilmesService {
     public void deletarFilmePorId(Integer id) {
         filmesRepository.deleteById(id);
     }
+
+
+//QUERIES PERSONALIZADAS
+
+    public List<Filmes> buscarPorTitulo(String titulo) {
+        List<Filmes> filmes = filmesRepository.buscarPorTitulo(titulo);
+        if (filmes.isEmpty()) {
+            throw new IllegalArgumentException("Filme sem titulo");
+        }
+        return filmes;
+    }
+
+    public List<Filmes> buscarPorAtor(String ator) {
+        List<Filmes> filmes = filmesRepository.buscarPorAtor(ator);
+        if (filmes.isEmpty()) {
+            throw new IllegalArgumentException("Informe nome de um ator ou atriz");
+        }
+        return filmes;
+    }
+
+    public List<Filmes> buscarPorGenero(String genero) {
+        List<Filmes> filmes = filmesRepository.buscarPorGenero(genero);
+        if (filmes.isEmpty()) {
+            throw new IllegalArgumentException("Informe um gênero");
+        }
+        return filmes;
+    }
+
+    public List<Filmes> buscarPorAno(Integer ano) {
+        List<Filmes> filmes = filmesRepository.buscarPorAno(ano);
+        if (filmes.isEmpty()) {
+            throw new IllegalArgumentException("Informe ano");
+        }
+        return filmes;
+    }
+
+    public List<Filmes> buscarPorRelevancia(String relevancia) {
+        List<Filmes> filmes = filmesRepository.buscarPorRelevancia(relevancia);
+        if (filmes.isEmpty()) {
+            throw new IllegalArgumentException("Informe  relevancia");
+        }
+        return filmes;
+    }
+
 }
+
+
+
+
+
