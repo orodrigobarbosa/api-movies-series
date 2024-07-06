@@ -25,7 +25,7 @@ public class SeriesService {
         return seriesRepository.findAll();
     }
 
-    public Series buscarPorId(Integer id){
+    public Series buscarPorId(Integer id) {
         return seriesRepository.findById(id).get();
     }
 
@@ -34,12 +34,43 @@ public class SeriesService {
         seriesRepository.deleteById(id);
     }
 
-    public Series atualizarSerie(Integer id, Series serie){
-        if (serie.getId()==null){
+    public Series atualizarSerie(Integer id, Series serie) {
+        if (serie.getId() == null) {
             throw new IllegalArgumentException("Série sem ID");
         }
-        Series serieExistente = seriesRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Serie não encontrada"));
+        Series serieExistente = seriesRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Serie não encontrada"));
         modelMapper.map(serie, serieExistente);
-        return  seriesRepository.save(serie);
+        return seriesRepository.save(serie);
     }
+
+    //QUERIES PERSONALIZADAS
+
+
+    public List<Series> buscarSeriePorTitulo(String titulo) {
+        List<Series> series = seriesRepository.seriesPorTitulo(titulo);
+
+        if (series.isEmpty()) {
+            throw new IllegalArgumentException("Digite um título");
+        }
+        return series;
+    }
+
+    public List<Series> buscarSeriePorGenero(String genero) {
+        List<Series> series = seriesRepository.seriesPorGenero(genero);
+
+        if (series.isEmpty()) {
+            throw new IllegalArgumentException("Digite um Genero");
+        }
+        return series;
+    }
+
+    public List<Series> buscarSeriePorAno(Integer ano) {
+        List<Series> series = seriesRepository.seriesPorAno(ano);
+
+        if (series.isEmpty()) {
+            throw new IllegalArgumentException("Digite um Ano");
+        }
+        return series;
+    }
+
 }
