@@ -1,6 +1,7 @@
 package com.rodrigo_barbosa.series_filmes_api.domain.controller;
 
 import com.rodrigo_barbosa.series_filmes_api.domain.model.Filmes;
+import com.rodrigo_barbosa.series_filmes_api.domain.repository.FilmesRepository;
 import com.rodrigo_barbosa.series_filmes_api.domain.service.FilmesService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequestMapping("/filmes")
 public class FilmesController {
 
+    private final FilmesRepository filmesRepository;
     private FilmesService filmesService;
 
     @PostMapping
@@ -43,5 +45,11 @@ public class FilmesController {
     @DeleteMapping("/{id}")
     public void deletarFilmePorId(@PathVariable Integer id) {
         filmesService.deletarFilmePorId(id);
+    }
+
+    //consultas personalizadas
+    @GetMapping("/filmes/titulo")
+    public List<Filmes> filmesPorTitulo(@RequestParam("titulo") String titulo) {
+        return filmesRepository.buscarPorTitulo(titulo);
     }
 }

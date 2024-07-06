@@ -2,6 +2,7 @@ package com.rodrigo_barbosa.series_filmes_api.domain.service;
 
 import com.rodrigo_barbosa.series_filmes_api.domain.model.Filmes;
 import com.rodrigo_barbosa.series_filmes_api.domain.repository.FilmesRepository;
+import feign.Param;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -65,6 +66,7 @@ public class FilmesService {
 
     public List<Filmes> buscarPorAtor(String ator) {
         List<Filmes> filmes = filmesRepository.buscarPorAtor(ator);
+        
         if (filmes.isEmpty()) {
             throw new IllegalArgumentException("Informe nome de um ator ou atriz");
         }
@@ -73,6 +75,7 @@ public class FilmesService {
 
     public List<Filmes> buscarPorGenero(String genero) {
         List<Filmes> filmes = filmesRepository.buscarPorGenero(genero);
+
         if (filmes.isEmpty()) {
             throw new IllegalArgumentException("Informe um gênero");
         }
@@ -81,6 +84,7 @@ public class FilmesService {
 
     public List<Filmes> buscarPorAno(Integer ano) {
         List<Filmes> filmes = filmesRepository.buscarPorAno(ano);
+
         if (filmes.isEmpty()) {
             throw new IllegalArgumentException("Informe ano");
         }
@@ -89,6 +93,7 @@ public class FilmesService {
 
     public List<Filmes> buscarPorRelevancia(String relevancia) {
         List<Filmes> filmes = filmesRepository.buscarPorRelevancia(relevancia);
+
         if (filmes.isEmpty()) {
             throw new IllegalArgumentException("Informe  relevancia");
         }
