@@ -48,8 +48,30 @@ public class FilmesController {
     }
 
     //consultas personalizadas
-    @GetMapping("/filmes/titulo")
+    @GetMapping("/buscar/titulo")
     public List<Filmes> filmesPorTitulo(@RequestParam("titulo") String titulo) {
-        return filmesRepository.buscarPorTitulo(titulo);
+        return filmesService.buscarPorTitulo(titulo);
     }
+
+    @GetMapping("/buscar/ator")
+    public List<Filmes> filmesPorAtor(@RequestParam("ator") String ator) {
+        return filmesService.buscarPorAtor(ator);
+    }
+
+    @GetMapping("/buscar/genero")
+    public List<Filmes> filmesPorGenero(@RequestParam("genero") String genero) {
+        return filmesService.buscarPorGenero(genero);
+    }
+
+    @GetMapping("/buscar/ano")
+    public List<Filmes> filmesPorAno(@RequestParam("ano") Integer ano) {
+        return filmesService.buscarPorAno(ano);
+    }
+
+    @GetMapping("/buscar/relevancia")
+    public List<Filmes> filmesPorRelevancia(@RequestParam("relevancia") String relevancia) {
+        return filmesService.buscarPorRelevancia(relevancia);
+
+    }
+
 }

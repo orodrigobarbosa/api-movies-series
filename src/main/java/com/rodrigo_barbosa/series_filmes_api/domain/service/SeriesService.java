@@ -43,6 +43,7 @@ public class SeriesService {
         return seriesRepository.save(serie);
     }
 
+
     //QUERIES PERSONALIZADAS
 
 
@@ -50,7 +51,7 @@ public class SeriesService {
         List<Series> series = seriesRepository.seriesPorTitulo(titulo);
 
         if (series.isEmpty()) {
-            throw new IllegalArgumentException("Digite um título");
+            throw new IllegalArgumentException("Nenhuma série encontrada para o título: " + titulo);
         }
         return series;
     }
@@ -59,7 +60,7 @@ public class SeriesService {
         List<Series> series = seriesRepository.seriesPorGenero(genero);
 
         if (series.isEmpty()) {
-            throw new IllegalArgumentException("Digite um Genero");
+            throw new IllegalArgumentException("Nenhuma série encontrada para o gênero: " + genero);
         }
         return series;
     }
@@ -68,7 +69,7 @@ public class SeriesService {
         List<Series> series = seriesRepository.seriesPorAno(ano);
 
         if (series.isEmpty()) {
-            throw new IllegalArgumentException("Digite um Ano");
+            throw new IllegalArgumentException("Nenhuma série encontrada para o ano: " + ano);
         }
         return series;
     }
