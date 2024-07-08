@@ -59,16 +59,16 @@ public class FilmesService {
     public List<Filmes> buscarPorTitulo(String titulo) {
         List<Filmes> filmes = filmesRepository.buscarPorTitulo(titulo);
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Filme sem titulo");
+            throw new IllegalArgumentException("Nenhum filme encontrada para o nome: " + titulo);
         }
         return filmes;
     }
 
     public List<Filmes> buscarPorAtor(String ator) {
         List<Filmes> filmes = filmesRepository.buscarPorAtor(ator);
-        
+
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Informe nome de um ator ou atriz");
+            throw new IllegalArgumentException("Nenhum filme encontrada para a/o ator/atriz: " + ator);
         }
         return filmes;
     }
@@ -77,7 +77,7 @@ public class FilmesService {
         List<Filmes> filmes = filmesRepository.buscarPorGenero(genero);
 
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Informe um gênero");
+            throw new IllegalArgumentException("Nenhum filme encontrada para o gênero: " + genero);
         }
         return filmes;
     }
@@ -86,7 +86,7 @@ public class FilmesService {
         List<Filmes> filmes = filmesRepository.buscarPorAno(ano);
 
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Informe ano");
+            throw new IllegalArgumentException("Nenhum filme encontrada para o ano: " + ano);
         }
         return filmes;
     }
@@ -95,7 +95,7 @@ public class FilmesService {
         List<Filmes> filmes = filmesRepository.buscarPorRelevancia(relevancia);
 
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Informe  relevancia");
+            throw new IllegalArgumentException("Nenhum filme encontrada para a relevância: " + relevancia);
         }
         return filmes;
     }

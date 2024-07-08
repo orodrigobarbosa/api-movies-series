@@ -15,15 +15,15 @@ public interface FilmesRepository extends JpaRepository<Filmes, Integer> {
     List<Filmes> buscarPorTitulo(@Param("titulo") String titulo);
 
     @Query("select f from Filmes f where f.ator = :ator")
-    List<Filmes> buscarPorAtor(String ator);
+    List<Filmes> buscarPorAtor(@Param("ator") String ator);
 
     @Query("select f from Filmes f where f.genero = :genero")
-    List<Filmes> buscarPorGenero(String genero);
+    List<Filmes> buscarPorGenero(@Param("genero") String genero);
 
     @Query("select f from Filmes f where f.ano = :ano")
-    List<Filmes> buscarPorAno(Integer ano);
+    List<Filmes> buscarPorAno(@Param("ano") Integer ano);
 
     @Query("select  f from Filmes f where f.relevancia = :relevancia")
-    List<Filmes> buscarPorRelevancia(String relevancia);
+    List<Filmes> buscarPorRelevancia(@Param("relevancia") String relevancia);
 
 }

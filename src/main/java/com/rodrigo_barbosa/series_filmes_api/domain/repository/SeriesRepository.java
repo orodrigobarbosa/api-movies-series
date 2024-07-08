@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SeriesRepository extends JpaRepository <Series, Integer> {
+public interface SeriesRepository extends JpaRepository<Series, Integer> {
 
     @Query("select s from Series s where s.titulo = :titulo")
     List<Series> seriesPorTitulo(@Param("titulo") String titulo);
 
 
-    @Query("select s from Series s where s.genero = : genero")
+    @Query("select s from Series s where s.genero = :genero")
     List<Series> seriesPorGenero(@Param("genero") String genero);
 
     @Query("select  s from Series s where s.ano = :ano")
