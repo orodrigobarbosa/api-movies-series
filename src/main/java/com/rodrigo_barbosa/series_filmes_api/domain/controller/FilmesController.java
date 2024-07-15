@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/filmes")
 public class FilmesController {
 
-    private final FilmesRepository filmesRepository;
+   
     private FilmesService filmesService;
 
     @PostMapping
