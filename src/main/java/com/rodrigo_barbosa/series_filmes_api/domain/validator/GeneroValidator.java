@@ -13,12 +13,12 @@ public class GeneroValidator implements ConstraintValidator<ValidGenero, String>
     }
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (value == null) {
+    public boolean isValid(String genero, ConstraintValidatorContext context) {
+        if (genero== null) {
             return false;
         }
         try {
-            GeneroEnum.valueOf(value.toUpperCase());
+            GeneroEnum.valueOf(genero.toUpperCase());
             return true;
         } catch (IllegalArgumentException e) {
             return false;

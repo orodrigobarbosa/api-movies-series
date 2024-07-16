@@ -1,6 +1,7 @@
 package com.rodrigo_barbosa.series_filmes_api.domain.model;
 
 import com.rodrigo_barbosa.series_filmes_api.domain.validator.ValidGenero;
+import com.rodrigo_barbosa.series_filmes_api.domain.validator.ValidRelevancia;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +30,10 @@ public class Series {
     @NotBlank
     @ValidGenero
     private String genero;
+
+    @NotBlank
+    @ValidRelevancia
+    private String relevancia;
 
     @NotBlank
     private String diretor;
