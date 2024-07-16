@@ -9,13 +9,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 
-
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = GeneroValidator.class)
-public @interface ValidGenero {
-//isto é uma validação personalizada
-    String message() default "Gênero inválido.";
+@Constraint(validatedBy = RelevanciaValidator.class)
+public @interface ValidRelevancia {
+
+    String message() default "A Relevância deve ser Alta, Media ou Baixa";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
+
 }
