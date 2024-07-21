@@ -1,6 +1,7 @@
 package com.rodrigo_barbosa.series_filmes_api.domain.controller;
 
-import com.rodrigo_barbosa.series_filmes_api.domain.dto.LoginRequest;
+
+import com.rodrigo_barbosa.series_filmes_api.domain.dto.LoginRequestDto;
 import com.rodrigo_barbosa.series_filmes_api.domain.jwt.JwtUtil;
 import com.rodrigo_barbosa.series_filmes_api.domain.model.User;
 import com.rodrigo_barbosa.series_filmes_api.domain.service.UserService;
@@ -53,7 +54,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String createAuthenticationToken(@RequestBody LoginRequest loginRequest) throws Exception {
+    public String createAuthenticationToken(@RequestBody LoginRequestDto loginRequest) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getCpf(), loginRequest.getSenha())
