@@ -1,6 +1,6 @@
 package com.rodrigo_barbosa.series_filmes_api.domain.validator;
 
-import jakarta.validation.Constraint;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
