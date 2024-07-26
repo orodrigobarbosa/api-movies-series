@@ -3,9 +3,11 @@ package com.rodrigo_barbosa.series_filmes_api.domain.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +15,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtil {
-
-    private String secret = "secret"; // Chave secreta para assinar o token JWT
+    private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256); // gera uma chave segura
 
     // Extrai o nome de usuário (CPF) do token JWT
     public String extractUsername(String token) {
@@ -34,7 +35,7 @@ public class JwtUtil {
 
     // Extrai todas as informações do token JWT
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
     }
 
     // Verifica se o token JWT está expirado
@@ -49,10 +50,14 @@ public class JwtUtil {
     }
 
     // Cria o token JWT com as informações fornecidas
-    private String createToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Token válido por 10 horas
-                .signWith(SignatureAlgorithm.HS256, secret).compact();
+    public String createToken(Map<String, Object> claims, String subject) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 horas
+                .signWith(SECRET_KEY)
+                .compact();
     }
 
     // Valida o token JWT
