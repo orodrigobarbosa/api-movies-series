@@ -34,19 +34,19 @@ public class UserController {
     // Método para listar todos os usuários
     @GetMapping
     public List<User> listarTodos() {
-        return userService.listarUsers(); // Chama o serviço para listar todos os usuários
+        return userService.listarUsers();
     }
 
     // Método para buscar um usuário por ID
     @GetMapping("/{id}")
     public User buscarPorId(@PathVariable Integer id) {
-        return userService.buscarUserPorId(id); // Chama o serviço para buscar um usuário pelo ID
+        return userService.buscarUserPorId(id);
     }
 
     // Método para deletar um usuário por ID
     @DeleteMapping("/deletar/{id}")
     public void deletar(@PathVariable Integer id) {
-        userService.deletarUser(id); // Chama o serviço para deletar um usuário pelo ID
+        userService.deletarUser(id);
     }
 
     // Método para atualizar um usuário por ID
@@ -62,14 +62,17 @@ public class UserController {
     @PostMapping("/login")
     public String createAuthenticationToken(@RequestBody LoginRequestDto loginRequest) throws Exception {
         try {
+            System.out.println("Tentando autenticar CPF: " + loginRequest.getCpf());
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getCpf(), loginRequest.getSenha()) // Autentica o usuário
+                    new UsernamePasswordAuthenticationToken(loginRequest.getCpf(), loginRequest.getSenha())
             );
+            System.out.println("Autenticação bem-sucedida para CPF: " + loginRequest.getCpf());
         } catch (AuthenticationException e) {
-            throw new Exception("CPF ou senha incorretos", e); // Lança exceção se a autenticação falhar
+            System.err.println("Falha na autenticação para CPF: " + loginRequest.getCpf());
+            throw new Exception("CPF ou senha incorretos", e);
         }
 
         final UserDetails userDetails = userService.loadUserByUsername(loginRequest.getCpf());
-        return jwtUtil.generateToken(userDetails); // Gera o token JWT
+        return jwtUtil.generateToken(userDetails);
     }
 }

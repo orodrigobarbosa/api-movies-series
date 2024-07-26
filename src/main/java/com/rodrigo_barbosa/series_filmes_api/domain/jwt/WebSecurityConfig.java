@@ -40,7 +40,7 @@ public class WebSecurityConfig {
         http.csrf().disable() // Desabilita a proteção CSRF, geralmente usado para APIs
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll() // Permite acesso aos endpoints do Swagger sem autenticação
-                        .requestMatchers("/login", "/user/cadastrar").permitAll() // Permite acesso aos endpoints de login e cadastro sem autenticação
+                        .requestMatchers("user/login", "/user/cadastrar").permitAll() // Permite acesso aos endpoints de login e cadastro sem autenticação
                         .requestMatchers("/user").permitAll() // Permite acesso ao endpoint de listagem de usuários sem autenticação
                         .requestMatchers("/user/{id}").permitAll() // Permite acesso ao endpoint de busca de usuário por ID sem autenticação
                         .anyRequest().authenticated() // Exige autenticação para todos os outros endpoints
