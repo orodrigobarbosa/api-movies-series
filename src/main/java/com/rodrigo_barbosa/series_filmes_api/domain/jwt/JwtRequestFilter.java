@@ -22,6 +22,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     // Injeção das dependências necessárias para manipulação do JWT e do UserDetails
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
+    //UserDetailsService é uma interface do Spring Security.
+    // Ela é utilizada para carregar dados específicos do usuário,
+    // fornecendo um método único chamado loadUserByUsername(String username)
+    // que retorna uma instância de UserDetails. Esta interface é fundamental
+    // para a autenticação e autorização no Spring Security
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
