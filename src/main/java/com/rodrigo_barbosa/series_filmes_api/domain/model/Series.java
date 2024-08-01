@@ -42,4 +42,5 @@ public class Series {
     @Min(1888)
     @Max(2100)
     private Integer ano;
+
 }

@@ -12,25 +12,27 @@ import java.util.List;
 @RequestMapping("/filmes")
 public class FilmesController {
 
-    private FilmesService filmesService;
-
-    // Endpoint para listar todos os filmes (público)
-    @GetMapping
-    public List<Filmes> listarFilmes() {
-        return filmesService.listarFilmes();
-    }
-
-    // Endpoint para buscar um filme pelo ID (público)
-    @GetMapping("/{id}")
-    public Filmes buscarFilmePorId(@PathVariable Integer id) {
-        return filmesService.buscarFilmeId(id);
-    }
+    private final FilmesService filmesService;
 
     // Endpoint para adicionar um novo filme (protegido, precisa de autenticação)
     @PostMapping
     public Filmes salvar(@RequestBody Filmes filmes) {
         return filmesService.salvar(filmes);
     }
+
+    // Endpoint para listar todos os filmes (protegido, precisa de autenticação)
+    @GetMapping
+    public List<Filmes> listarFilmes() {
+        return filmesService.listarFilmes();
+    }
+
+    // Endpoint para buscar um filme pelo ID (protegido, precisa de autenticação)
+    @GetMapping("/{id}")
+    public Filmes buscarFilmePorId(@PathVariable Integer id) {
+        return filmesService.buscarFilmeId(id);
+    }
+
+
 
     // Endpoint para atualizar um filme pelo ID (protegido, precisa de autenticação)
     @PutMapping("/atualizar/{id}")
@@ -45,31 +47,5 @@ public class FilmesController {
     @DeleteMapping("/{id}")
     public void deletarFilmePorId(@PathVariable Integer id) {
         filmesService.deletarFilmePorId(id);
-    }
-
-    // Consultas personalizadas (público)
-    @GetMapping("/buscar/titulo")
-    public List<Filmes> filmesPorTitulo(@RequestParam("titulo") String titulo) {
-        return filmesService.buscarPorTitulo(titulo);
-    }
-
-    @GetMapping("/buscar/ator")
-    public List<Filmes> filmesPorAtor(@RequestParam("ator") String ator) {
-        return filmesService.buscarPorAtor(ator);
-    }
-
-    @GetMapping("/buscar/genero")
-    public List<Filmes> filmesPorGenero(@RequestParam("genero") String genero) {
-        return filmesService.buscarPorGenero(genero);
-    }
-
-    @GetMapping("/buscar/ano")
-    public List<Filmes> filmesPorAno(@RequestParam("ano") Integer ano) {
-        return filmesService.buscarPorAno(ano);
-    }
-
-    @GetMapping("/buscar/relevancia")
-    public List<Filmes> filmesPorRelevancia(@RequestParam("relevancia") String relevancia) {
-        return filmesService.buscarPorRelevancia(relevancia);
     }
 }
