@@ -3,6 +3,7 @@ package com.rodrigo_barbosa.series_filmes_api.domain.jwt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,9 +41,15 @@ public class WebSecurityConfig {
         http.csrf().disable() // Desabilita a proteção CSRF, geralmente usado para APIs
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll() // Permite acesso aos endpoints do Swagger sem autenticação
-                        .requestMatchers("user/login", "/user/cadastrar").permitAll() // Permite acesso aos endpoints de login e cadastro sem autenticação
+                        .requestMatchers("/user/login").permitAll() // Permite acesso aos endpoints de login e cadastro sem autenticação
+                        .requestMatchers(HttpMethod.POST, "/user/cadastrar").permitAll()
                         .requestMatchers("/user").permitAll() // Permite acesso ao endpoint de listagem de usuários sem autenticação
+                        .requestMatchers("/user/deletar/{id}").permitAll() // Permite deletar usuário sem autenticação
                         .requestMatchers("/user/{id}").permitAll() // Permite acesso ao endpoint de busca de usuário por ID sem autenticação
+                        .requestMatchers("/filmes").permitAll() // Permite listar filmes sem autenticação
+                        .requestMatchers("/filmes/{id}").permitAll() // Permite buscar filme por ID sem autenticação
+                        .requestMatchers(HttpMethod.POST, "/filmes").permitAll() // Permite adicionar filmes sem autenticação
+                        .requestMatchers("/filmes/**").authenticated() // Protege todos os outros endpoints de filmes (atualizar, deletar)
                         .anyRequest().authenticated() // Exige autenticação para todos os outros endpoints
                 )
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint) // Define o Entry Point para tratamento de exceções de autenticação
@@ -54,4 +61,6 @@ public class WebSecurityConfig {
 
         return http.build(); // Constrói e retorna a cadeia de filtros de segurança
     }
+
+
 }

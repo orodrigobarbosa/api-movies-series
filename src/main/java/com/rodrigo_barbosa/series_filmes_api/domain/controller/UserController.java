@@ -31,6 +31,7 @@ public class UserController {
         return userService.cadastrarUser(user); // Chama o serviço para cadastrar o usuário
     }
 
+
     // Método para listar todos os usuários
     @GetMapping
     public List<User> listarTodos() {
@@ -58,7 +59,9 @@ public class UserController {
         return userService.atualizarUser(id, user); // Chama o serviço para atualizar o usuário
     }
 
-    // Método para efetuar login
+    // Método para efetuar login **************
+
+
     @PostMapping("/login")
     public String createAuthenticationToken(@RequestBody LoginRequestDto loginRequest) throws Exception {
         try {

@@ -12,25 +12,27 @@ import java.util.List;
 @RequestMapping("/series")
 public class SeriesController {
 
-    private SeriesService seriesService;
-
-    // Endpoint para listar todas as séries (público)
-    @GetMapping
-    public List<Series> listarSeries() {
-        return seriesService.listarSeries();
-    }
-
-    // Endpoint para buscar uma série pelo ID (público)
-    @GetMapping("/{id}")
-    public Series buscarSeriePorId(@PathVariable Integer id) {
-        return seriesService.buscarPorId(id);
-    }
+    private final SeriesService seriesService;
 
     // Endpoint para adicionar uma nova série (protegido, precisa de autenticação)
     @PostMapping("/cadastrar")
     public Series cadastrarSerie(@RequestBody Series serie) {
         return seriesService.cadastrarSerie(serie);
     }
+
+
+    // Endpoint para listar todas as séries (protegido, precisa de autenticação)
+    @GetMapping
+    public List<Series> listarSeries() {
+        return seriesService.listarSeries();
+    }
+
+    // Endpoint para buscar uma série pelo ID (protegido, precisa de autenticação)
+    @GetMapping("/{id}")
+    public Series buscarSeriePorId(@PathVariable Integer id) {
+        return seriesService.buscarPorId(id);
+    }
+
 
     // Endpoint para atualizar uma série pelo ID (protegido, precisa de autenticação)
     @PutMapping("/atualizar/{id}")
@@ -45,21 +47,5 @@ public class SeriesController {
     @DeleteMapping("/{id}")
     public void deletarSerie(@PathVariable Integer id) {
         seriesService.deletarSeriePorId(id);
-    }
-
-    // Consultas personalizadas (público)
-    @GetMapping("/buscar/titulo")
-    public List<Series> seriesPorTitulo(@RequestParam("titulo") String titulo) {
-        return seriesService.buscarSeriePorTitulo(titulo);
-    }
-
-    @GetMapping("/buscar/genero")
-    public List<Series> seriesPorGenero(@RequestParam("genero") String genero) {
-        return seriesService.buscarSeriePorGenero(genero);
-    }
-
-    @GetMapping("/buscar/ano")
-    public List<Series> seriesPorAno(@RequestParam("ano") Integer ano) {
-        return seriesService.buscarSeriePorAno(ano);
     }
 }
