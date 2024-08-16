@@ -33,7 +33,6 @@ public class FilmesController {
     }
 
 
-
     // Endpoint para atualizar um filme pelo ID (protegido, precisa de autenticação)
     @PutMapping("/atualizar/{id}")
     public Filmes atualizar(@PathVariable Integer id, @RequestBody Filmes filmes) {

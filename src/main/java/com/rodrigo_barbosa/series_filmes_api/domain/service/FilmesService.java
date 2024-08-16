@@ -1,5 +1,9 @@
 package com.rodrigo_barbosa.series_filmes_api.domain.service;
 
+import com.rodrigo_barbosa.series_filmes_api.domain.handler.HandleAnoNaoEncontrado;
+import com.rodrigo_barbosa.series_filmes_api.domain.handler.HandleAtorNaoEncontrado;
+import com.rodrigo_barbosa.series_filmes_api.domain.handler.HandleGeneroNaoEncontrado;
+import com.rodrigo_barbosa.series_filmes_api.domain.handler.HandleTituloNaoEncontrado;
 import com.rodrigo_barbosa.series_filmes_api.domain.model.Filmes;
 import com.rodrigo_barbosa.series_filmes_api.domain.repository.FilmesRepository;
 import feign.Param;
@@ -59,7 +63,7 @@ public class FilmesService {
     public List<Filmes> buscarPorTitulo(String titulo) {
         List<Filmes> filmes = filmesRepository.buscarPorTitulo(titulo);
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Nenhum filme encontrada para o nome: " + titulo);
+            throw new HandleTituloNaoEncontrado("Nenhum filme encontrada para o nome: " + titulo);
         }
         return filmes;
     }
@@ -68,7 +72,7 @@ public class FilmesService {
         List<Filmes> filmes = filmesRepository.buscarPorAtor(ator);
 
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Nenhum filme encontrada para a/o ator/atriz: " + ator);
+            throw new HandleAtorNaoEncontrado("Nenhum filme encontrada para a/o ator/atriz: " + ator);
         }
         return filmes;
     }
@@ -77,7 +81,7 @@ public class FilmesService {
         List<Filmes> filmes = filmesRepository.buscarPorGenero(genero);
 
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Nenhum filme encontrada para o gênero: " + genero);
+            throw new HandleGeneroNaoEncontrado("Nenhum filme encontrada para o gênero: " + genero);
         }
         return filmes;
     }
@@ -86,7 +90,7 @@ public class FilmesService {
         List<Filmes> filmes = filmesRepository.buscarPorAno(ano);
 
         if (filmes.isEmpty()) {
-            throw new IllegalArgumentException("Nenhum filme encontrada para o ano: " + ano);
+            throw new HandleAnoNaoEncontrado("Nenhum filme encontrada para o ano: " + ano);
         }
         return filmes;
     }

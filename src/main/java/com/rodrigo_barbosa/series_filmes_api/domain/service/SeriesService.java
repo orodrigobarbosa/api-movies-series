@@ -1,6 +1,8 @@
 package com.rodrigo_barbosa.series_filmes_api.domain.service;
 
 
+import com.rodrigo_barbosa.series_filmes_api.domain.handler.HandleGeneroNaoEncontrado;
+import com.rodrigo_barbosa.series_filmes_api.domain.handler.HandleTituloNaoEncontrado;
 import com.rodrigo_barbosa.series_filmes_api.domain.model.Series;
 import com.rodrigo_barbosa.series_filmes_api.domain.repository.SeriesRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -51,7 +53,7 @@ public class SeriesService {
         List<Series> series = seriesRepository.seriesPorTitulo(titulo);
 
         if (series.isEmpty()) {
-            throw new IllegalArgumentException("Nenhuma série encontrada para o título: " + titulo);
+            throw new HandleTituloNaoEncontrado("Nenhuma série encontrada para o título: " + titulo);
         }
         return series;
     }
@@ -60,7 +62,7 @@ public class SeriesService {
         List<Series> series = seriesRepository.seriesPorGenero(genero);
 
         if (series.isEmpty()) {
-            throw new IllegalArgumentException("Nenhuma série encontrada para o gênero: " + genero);
+            throw new HandleGeneroNaoEncontrado("Nenhuma série encontrada para o gênero: " + genero);
         }
         return series;
     }
