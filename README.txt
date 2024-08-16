@@ -1,6 +1,10 @@
-API de Filmes e Séries
+
+API DE FILMES E SÉRIES - COMO ESTUDO
+
+
 Esta API permite gerenciar um catálogo de filmes e séries, bem como a criação e autenticação de usuários. 
 Abaixo estão os principais componentes e tecnologias utilizadas no projeto:
+
 
 Tecnologias Utilizadas
 
