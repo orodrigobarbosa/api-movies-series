@@ -20,7 +20,6 @@ public class SeriesController {
         return seriesService.cadastrarSerie(serie);
     }
 
-
     // Endpoint para listar todas as séries (protegido, precisa de autenticação)
     @GetMapping
     public List<Series> listarSeries() {

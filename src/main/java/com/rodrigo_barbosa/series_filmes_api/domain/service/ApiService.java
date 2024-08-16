@@ -22,3 +22,4 @@ public class ApiService {
         System.out.println(response.getBody());
     }
 }
+//Service responsável por chamar um endpoint protegido de uma API
